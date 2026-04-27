@@ -16,8 +16,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckChatMessage(id);
-            if (!result) return NotFound();
-            return Ok("Chat message exists");
+            if (result == null) return NotFound(new { success = false, message = "Chat message not found" });
+            return Ok(new { success = true, data = result });
         }
 
         [HttpPost("add")]
@@ -31,7 +31,7 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.DeleteChatMessage(id);
-            if (!result) return NotFound();
+            if (!result) return NotFound("Chat message not found");
             return Ok("Chat message deleted");
         }
     }

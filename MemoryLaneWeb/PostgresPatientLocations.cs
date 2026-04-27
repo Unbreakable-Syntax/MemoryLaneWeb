@@ -9,11 +9,11 @@
             _db = db;
         }
 
-        public async Task<bool> CheckPatientLocation(long id)
+        public async Task<PatientLocations?> CheckPatientLocation(long id)
         {
             var location = await _db.PatientLocations.FindAsync(id);
-            if (location == null) return false;
-            return true;
+            if (location == null) return null;
+            return location;
         }
 
         public async Task AddPatientLocation(PatientLocations location)

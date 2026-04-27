@@ -9,11 +9,11 @@
             _db = db;
         }
 
-        public async Task<bool> CheckFamilyPatient(int id)
+        public async Task<FamilyPatient?> CheckFamilyPatient(int id)
         {
             var fpatient = await _db.FamilyPatient.FindAsync(id);
-            if (fpatient == null) return false;
-            return true;
+            if (fpatient == null) return null;
+            return fpatient;
         }
 
         public async Task AddFamilyPatient(FamilyPatient fpatient)

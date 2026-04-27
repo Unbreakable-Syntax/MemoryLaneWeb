@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Microsoft.AspNetCore.Mvc;
 
 namespace MemoryLaneWeb
 {
@@ -16,9 +17,9 @@ namespace MemoryLaneWeb
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(long id)
         {
-            var alert = await _service.CheckEmergencyAlert(id);
-            if (!alert) return NotFound();
-            return Ok("Emergency alert found");
+            var result = await _service.CheckEmergencyAlert(id);
+            if (result == null) return NotFound(new { success = false, message = "Emergency alert not found" });
+            return Ok(new { success = true, data = result });
         }
 
         [HttpPost("add")]
@@ -32,7 +33,7 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Delete(long id)
         {
             var result = await _service.DeleteEmergencyAlert(id);
-            if (!result) return NotFound();
+            if (!result) return NotFound("Emergency alert not found");
             return Ok("Emergency alert deleted");
         }
     }

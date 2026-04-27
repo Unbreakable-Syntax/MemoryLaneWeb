@@ -9,11 +9,11 @@
             _db = db;
         }
 
-        public async Task<bool> CheckSafezone(int id)
+        public async Task<SafeZones?> CheckSafezone(int id)
         {
             var safezone = await _db.SafeZones.FindAsync(id);
-            if (safezone == null) return false;
-            return true;
+            if (safezone == null) return null;
+            return safezone;
         }
 
         public async Task AddSafezone(SafeZones safezone)

@@ -9,11 +9,11 @@
             _db = db;
         }
 
-        public async Task<bool> CheckChatMessage(int id)
+        public async Task<ChatMessages?> CheckChatMessage(int id)
         {
             var message = await _db.ChatMessages.FindAsync(id);
-            if (message == null) return false;
-            return true;
+            if (message == null) return null;
+            return message;
         }
 
         public async Task AddChatMessage(ChatMessages message)

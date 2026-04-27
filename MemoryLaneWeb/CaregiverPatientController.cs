@@ -17,8 +17,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckCaregiverPatient(id);
-            if (!result) return NotFound();
-            return Ok("Caregiver patient found");
+            if (result == null) return NotFound(new { success = false, message = "Caregiver patient not found" });
+            return Ok(new { success = true, data = result });
         } 
 
         [HttpPost("add")]
@@ -32,7 +32,7 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.DeleteCaregiverPatient(id);
-            if (!result) return NotFound();
+            if (!result) return NotFound("Caregiver patient not found");
             return Ok("Caregiver patient deleted");
         }
     }

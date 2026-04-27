@@ -17,8 +17,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckReminder(id);
-            if (!result) return NotFound();
-            return Ok("Reminder found");
+            if (result == null) return NotFound(new { success = false, message = "Reminder not found" });
+            return Ok(new { success = true, data = result });
         }
 
         [HttpPost("add")]
@@ -32,7 +32,7 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.DeleteReminder(id);
-            if (!result) return NotFound();
+            if (!result) return NotFound("Reminder not found");
             return Ok("Reminder deleted");
         }
     }

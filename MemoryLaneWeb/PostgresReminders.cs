@@ -9,11 +9,11 @@
             _db = db;
         }
 
-        public async Task<bool> CheckReminder(int id)
+        public async Task<Reminders?> CheckReminder(int id)
         {
             var reminder = await _db.Reminders.FindAsync(id);
-            if (reminder == null) return false;
-            return true;
+            if (reminder == null) return null;
+            return reminder;
         }
 
         public async Task AddReminder(Reminders reminder)

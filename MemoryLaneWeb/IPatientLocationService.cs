@@ -2,7 +2,7 @@
 {
     public interface IPatientLocationService
     {
-        Task<bool> CheckPatientLocation(long id);
+        Task<PatientLocations?> CheckPatientLocation(long id);
         Task AddPatientLocation(PatientLocations location);
         Task<bool> DeletePatientLocation(long id);
     }

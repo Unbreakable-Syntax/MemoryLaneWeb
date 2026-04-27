@@ -9,11 +9,11 @@
             _db = db;
         }
 
-        public async Task<bool> CheckUser(int id)
+        public async Task<Users?> CheckUser(int id)
         {
             var user = await _db.Users.FindAsync(id);
-            if (user == null) return false;
-            return true;
+            if (user == null) return null;
+            return user;
         }
 
         public async Task AddUser(Users user)

@@ -9,11 +9,11 @@
             _db = db;
         }
 
-        public async Task<bool> CheckEmergencyAlert(long id)
+        public async Task<EmergencyAlerts?> CheckEmergencyAlert(long id)
         {
             var alert = await _db.EmergencyAlerts.FindAsync(id);
-            if (alert == null) return false;
-            return true;
+            if (alert == null) return null;
+            return alert;
         }
 
         public async Task AddEmergencyAlert(EmergencyAlerts alert)

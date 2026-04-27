@@ -17,8 +17,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckSafezone(id);
-            if (!result) return NotFound();
-            return Ok("Safezone found");
+            if (result == null) return NotFound(new { success = false, message = "Safezone not found" });
+            return Ok(new { success = true, data = result });
         }
 
         [HttpPost("add")]
@@ -32,7 +32,7 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.DeleteSafezone(id);
-            if (!result) return NotFound();
+            if (!result) return NotFound("Safezone not found");
             return Ok("Safezone deleted");
         }
     }
