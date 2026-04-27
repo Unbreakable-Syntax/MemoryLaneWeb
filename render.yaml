@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: memory-user-service
+    runtime: dotnet
+    buildCommand: dotnet publish -c Release -o out
+    startCommand: dotnet out/MemoryUserService.dll
+    envVars:
+      - key: ASPNETCORE_ENVIRONMENT
+        value: Production
