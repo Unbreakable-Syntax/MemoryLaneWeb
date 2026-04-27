@@ -32,6 +32,7 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
+app.Urls.Add($"http://0.0.0.0:{Environment.GetEnvironmentVariable("PORT")}");
 
 app.UseHttpsRedirection();
 
