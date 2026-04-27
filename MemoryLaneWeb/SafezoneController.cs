@@ -17,8 +17,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckSafezone(id);
-            if (result == null) return NotFound(new { success = false, message = "Safezone not found" });
-            return Ok(new { success = true, data = result });
+            if (result == null) return NotFound("Safezone not found");
+            return Ok(result);
         }
 
         [HttpPost("add")]

@@ -16,8 +16,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckChatMessage(id);
-            if (result == null) return NotFound(new { success = false, message = "Chat message not found" });
-            return Ok(new { success = true, data = result });
+            if (result == null) return NotFound("Chat message not found");
+            return Ok(result);
         }
 
         [HttpPost("add")]

@@ -18,8 +18,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(long id)
         {
             var result = await _service.CheckEmergencyAlert(id);
-            if (result == null) return NotFound(new { success = false, message = "Emergency alert not found" });
-            return Ok(new { success = true, data = result });
+            if (result == null) return NotFound("Emergency alert not found");
+            return Ok(result);
         }
 
         [HttpPost("add")]

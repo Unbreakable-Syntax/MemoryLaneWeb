@@ -17,8 +17,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckCaregiverPatient(id);
-            if (result == null) return NotFound(new { success = false, message = "Caregiver patient not found" });
-            return Ok(new { success = true, data = result });
+            if (result == null) return NotFound("Caregiver patient not found");
+            return Ok(result);
         } 
 
         [HttpPost("add")]

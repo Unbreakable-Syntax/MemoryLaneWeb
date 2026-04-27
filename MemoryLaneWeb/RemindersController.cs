@@ -17,8 +17,8 @@ namespace MemoryLaneWeb
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckReminder(id);
-            if (result == null) return NotFound(new { success = false, message = "Reminder not found" });
-            return Ok(new { success = true, data = result });
+            if (result == null) return NotFound("Reminder not found");
+            return Ok(result);
         }
 
         [HttpPost("add")]
