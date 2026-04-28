@@ -13,6 +13,14 @@ namespace MemoryLaneWeb
             _service = service;
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> GetAll(int? reminderID, int? patientID, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt)
+        {
+            var result = await _service.FindReminders(reminderID, patientID, title, desc, reminderType, remindAt);
+            if (result.Count == 0) return NotFound("Reminder not found");
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {
