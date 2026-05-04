@@ -21,6 +21,14 @@ namespace MemoryLaneWeb
             return Ok(result);
         }
 
+        [HttpGet("userid/{id}")]
+        public async Task<IActionResult> GetUserID(int id)
+        {
+            var result = await _service.CheckPatientUserID(id);
+            if (result == null) return NotFound("Patient not found");
+            return Ok(result);
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> Add(Patients patient)
         {

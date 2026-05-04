@@ -14,12 +14,8 @@ namespace MemoryLaneWeb
         public async Task<Users?> CheckUserEmail(string? email)
         {
             var query = _db.Users.AsQueryable();
-
-            if (!string.IsNullOrEmpty(email))
-                query = query.Where(r => r.Email == email);
-
-             var users = await query.FirstOrDefaultAsync();
-
+            if (!string.IsNullOrEmpty(email)) query = query.Where(r => r.Email == email);
+            var users = await query.FirstOrDefaultAsync();
             return users;
         }
 

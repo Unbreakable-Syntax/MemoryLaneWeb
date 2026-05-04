@@ -35,6 +35,14 @@ namespace MemoryLaneWeb
             return patient;
         }
 
+        public async Task<Patients?> CheckPatientUserID(int userid)
+        {
+            var query = _db.Patients.AsQueryable();
+            query = query.Where(r => r.UserID == userid);
+            var patient = await query.FirstOrDefaultAsync();
+            return patient;
+        }
+
         public async Task AddPatient(Patients patient)
         {
             _db.Patients.Add(patient);
