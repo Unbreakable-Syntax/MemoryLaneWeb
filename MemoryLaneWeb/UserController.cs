@@ -25,7 +25,7 @@ namespace MemoryLaneWeb
         {
             var result = await _service.CheckUserEmail(email);
             if (result == null) return NotFound("User not found");
-            return Ok("User found");
+            return Ok(result);
         }
 
         [HttpPost("add")]
