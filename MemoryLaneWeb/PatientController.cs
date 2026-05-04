@@ -35,5 +35,13 @@ namespace MemoryLaneWeb
             if (!result) return NotFound("Patient not found");
             return Ok("Patient deleted");
         }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, int? age, string? medcons, string? meds, string? allergies)
+        {
+            var result = await _service.UpdatePatient(id, age, medcons, meds, allergies);
+            if (!result) return NotFound("Patient not found");
+            return Ok("Patient updated");
+        }
     }
 }

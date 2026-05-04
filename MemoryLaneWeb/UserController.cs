@@ -20,11 +20,19 @@ namespace MemoryLaneWeb
             return Ok(result);
         }
 
+        [HttpGet("email/{email}")]
+        public async Task<IActionResult> GetEmail(string email)
+        {
+            var result = await _service.CheckUserEmail(email);
+            if (result == null) return NotFound("User not found");
+            return Ok("User found");
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> Add(Users user)
         {
-            await _service.AddUser(user);
-            return Ok("User added");
+            int id = await _service.AddUser(user);
+            return Ok(id);
         }
 
         [HttpDelete("{id}")]

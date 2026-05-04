@@ -1,4 +1,7 @@
-﻿namespace MemoryLaneWeb
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+
+namespace MemoryLaneWeb
 {
     public class PostgresPatient : IPatientService
     {
@@ -7,6 +10,22 @@
         public PostgresPatient(AppDbContext db)
         {
             _db = db;
+        }
+
+        public async Task<bool> UpdatePatient(int id, int? age, string? medcons, string? meds, string? allergies)
+        {
+            var patient = await _db.Patients.FindAsync(id);
+            if (patient == null) return false;
+
+            // Only update fields that are NOT null
+            if (age.HasValue) patient.Age = age.Value;
+            if (!string.IsNullOrEmpty(medcons)) patient.MedicalConditions = medcons;
+            if (!string.IsNullOrEmpty(meds)) patient.Medications = meds;
+            if (!string.IsNullOrEmpty(allergies)) patient.Allergies = allergies;
+
+            patient.UpdatedAt = DateTime.UtcNow;
+            await _db.SaveChangesAsync();
+            return true;
         }
 
         public async Task<Patients?> CheckPatient(int id)

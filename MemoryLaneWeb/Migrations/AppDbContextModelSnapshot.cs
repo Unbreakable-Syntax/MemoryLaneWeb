@@ -30,17 +30,29 @@ namespace MemoryLaneWeb.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<DateTime>("AssignedAt")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<int>("CaregiverID")
                         .HasColumnType("integer");
 
-                    b.Property<string>("Notes")
+                    b.Property<string>("EmergencyContactName")
                         .HasColumnType("text");
+
+                    b.Property<string>("EmergencyContactPhone")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("LinkedAt")
+                        .HasColumnType("timestamp with time zone");
 
                     b.Property<int>("PatientID")
                         .HasColumnType("integer");
+
+                    b.Property<double?>("SafeZoneLatitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<double?>("SafeZoneLongitude")
+                        .HasColumnType("double precision");
+
+                    b.Property<double?>("SafeZoneRadius")
+                        .HasColumnType("double precision");
 
                     b.HasKey("Id");
 
@@ -232,28 +244,25 @@ namespace MemoryLaneWeb.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("PatientID"));
 
+                    b.Property<int?>("Age")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Allergies")
+                        .HasColumnType("text");
+
                     b.Property<DateTime?>("Birthdate")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<int>("CaregiverID")
-                        .HasColumnType("integer");
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("EmergencyContact")
-                        .HasColumnType("text");
-
-                    b.Property<string>("EmergencyPhone")
-                        .HasColumnType("text");
-
                     b.Property<int?>("Gender")
                         .HasColumnType("integer");
 
-                    b.Property<DateTime>("LinkedAt")
-                        .HasColumnType("timestamp with time zone");
+                    b.Property<string>("MedicalConditions")
+                        .HasColumnType("text");
 
-                    b.Property<string>("MedicalNotes")
+                    b.Property<string>("Medications")
                         .HasColumnType("text");
 
                     b.Property<DateTime>("UpdatedAt")

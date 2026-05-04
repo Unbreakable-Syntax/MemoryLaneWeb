@@ -3,7 +3,8 @@
     public interface IUserService
     {
         Task<Users?> CheckUser(int id);
-        Task AddUser(Users user);
+        Task<Users?> CheckUserEmail(string? email);
+        Task<int> AddUser(Users user);
         Task<bool> DeleteUser(int id);
     }
 }

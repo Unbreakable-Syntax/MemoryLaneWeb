@@ -13,13 +13,12 @@ namespace MemoryLaneWeb
         public int UserID { get; set; }
         public DateTime? Birthdate { get; set; }
         public Genders? Gender { get; set; }
-        public string? MedicalNotes { get; set; }
-        public string? EmergencyContact { get; set; }
-        public string? EmergencyPhone { get; set; }
+        public string? MedicalConditions { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
-        public int CaregiverID { get; set; }
-        public DateTime LinkedAt { get; set; }
+        public int? Age { get; set; }
+        public string? Medications { get; set; }
+        public string? Allergies { get; set; }
         public Users? User { get; set; }
     }
 }
