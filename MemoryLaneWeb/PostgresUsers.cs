@@ -11,10 +11,34 @@ namespace MemoryLaneWeb
             _db = db;
         }
 
+        public async Task<Users?> CheckUser(string fullname, string email, string phone, UserRoles? role, bool? isactive)
+        {
+            var query = _db.Users.AsQueryable();
+            if (!string.IsNullOrEmpty(fullname)) query = query.Where(u => fullname.Equals(u.FullName));
+            if (!string.IsNullOrEmpty(email)) query = query.Where(u => email.Equals(u.Email));
+            if (!string.IsNullOrEmpty(phone)) query = query.Where(u => phone.Equals(u.Phone));
+            if (role.HasValue) query = query.Where(u => u.Role == role.Value);
+            if (isactive.HasValue) query = query.Where(u => u.IsActive == isactive.Value);
+            var user = await query.FirstOrDefaultAsync();
+            return user;
+        }
+
+        public async Task<List<Users>> CheckUsers(string fullname, string email, string phone, UserRoles? role, bool? isactive)
+        {
+            var query = _db.Users.AsQueryable();
+            if (!string.IsNullOrEmpty(fullname)) query = query.Where(u => fullname.Equals(u.FullName));
+            if (!string.IsNullOrEmpty(email)) query = query.Where(u => email.Equals(u.Email));
+            if (!string.IsNullOrEmpty(phone)) query = query.Where(u => phone.Equals(u.Phone));
+            if (role.HasValue) query = query.Where(u => u.Role == role.Value);
+            if (isactive.HasValue) query = query.Where(u => u.IsActive == isactive.Value);
+            var users = await query.ToListAsync();
+            return users;
+        }
+
         public async Task<Users?> CheckUserEmail(string? email)
         {
             var query = _db.Users.AsQueryable();
-            if (!string.IsNullOrEmpty(email)) query = query.Where(r => r.Email == email);
+            
             var users = await query.FirstOrDefaultAsync();
             return users;
         }

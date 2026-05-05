@@ -20,11 +20,19 @@ namespace MemoryLaneWeb
             return Ok(result);
         }
 
-        [HttpGet("email/{email}")]
-        public async Task<IActionResult> GetEmail(string email)
+        [HttpGet("search")]
+        public async Task<IActionResult> Get(string fullname, string email, string phone, UserRoles? role, bool? isactive)
         {
-            var result = await _service.CheckUserEmail(email);
+            var result = await _service.CheckUser(fullname, email, phone, role, isactive);
             if (result == null) return NotFound("User not found");
+            return Ok(result);
+        }
+
+        [HttpGet("searchmultiple")]
+        public async Task<IActionResult> GetAll(string fullname, string email, string phone, UserRoles? role, bool? isactive)
+        {
+            var result = await _service.CheckUsers(fullname, email, phone, role, isactive);
+            if (result.Count == 0) return NotFound("User not found");
             return Ok(result);
         }
 

@@ -19,7 +19,23 @@ namespace MemoryLaneWeb
             var result = await _service.CheckCaregiverPatient(id);
             if (result == null) return NotFound("Caregiver patient not found");
             return Ok(result);
-        } 
+        }
+
+        [HttpGet("search")]
+        public async Task<IActionResult> Get(int? caregiverid, int? patientid, string emername, string emerphone)
+        {
+            var result = await _service.CheckCaregiverPatient(caregiverid, patientid, emername, emerphone);
+            if (result == null) return NotFound("Caregiver patient not found");
+            return Ok(result);
+        }
+
+        [HttpGet("searchmultiple")]
+        public async Task<IActionResult> GetAll(int? caregiverid, int? patientid, string emername, string emerphone)
+        {
+            var result = await _service.CheckCaregiverPatients(caregiverid, patientid, emername, emerphone);
+            if (result.Count == 0) return NotFound("Caregiver patient not found");
+            return Ok(result);
+        }
 
         [HttpPost("add")]
         public async Task<IActionResult> Add(CaregiverPatient patient)

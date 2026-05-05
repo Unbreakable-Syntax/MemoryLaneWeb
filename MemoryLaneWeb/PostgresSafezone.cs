@@ -1,4 +1,6 @@
-﻿namespace MemoryLaneWeb
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace MemoryLaneWeb
 {
     public class PostgresSafezone : ISafezoneService
     {
@@ -14,6 +16,30 @@
             var safezone = await _db.SafeZones.FindAsync(id);
             if (safezone == null) return null;
             return safezone;
+        }
+
+        public async Task<SafeZones?> CheckSafezone(int? patientid, string zonename, bool? isactive, int? createdby)
+        {
+            var query = _db.SafeZones.AsQueryable();
+            if (patientid.HasValue) query = query.Where(u => u.PatientID == patientid);
+            if (!string.IsNullOrEmpty(zonename)) query = query.Where(u => zonename.Equals(u.ZoneName));
+            if (isactive.HasValue) query = query.Where(u => u.IsActive == isactive.Value);
+            if (createdby.HasValue) query = query.Where(u => u.CreatedBy == createdby.Value);
+
+            var safezone = await query.FirstOrDefaultAsync();
+            return safezone;
+        }
+
+        public async Task<List<SafeZones>> CheckSafezones(int? patientid, string zonename, bool? isactive, int? createdby)
+        {
+            var query = _db.SafeZones.AsQueryable();
+            if (patientid.HasValue) query = query.Where(u => u.PatientID == patientid);
+            if (!string.IsNullOrEmpty(zonename)) query = query.Where(u => zonename.Equals(u.ZoneName));
+            if (isactive.HasValue) query = query.Where(u => u.IsActive == isactive.Value);
+            if (createdby.HasValue) query = query.Where(u => u.CreatedBy == createdby.Value);
+
+            var safezones = await query.ToListAsync();
+            return safezones;
         }
 
         public async Task AddSafezone(SafeZones safezone)

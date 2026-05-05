@@ -14,18 +14,12 @@ namespace MemoryLaneWeb
         public async Task<List<Reminders>> FindReminders(int? reminderID, int? patientID, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt)
         {
             var query = _db.Reminders.AsQueryable();
-            if (reminderID.HasValue)
-                query = query.Where(u => u.ReminderID == reminderID.Value);
-            if (patientID.HasValue)
-                query = query.Where(u => u.PatientID == patientID.Value);
-            if (!string.IsNullOrEmpty(title))
-                query = query.Where(u => u.Title == title);
-            if (!string.IsNullOrEmpty(desc))
-                query = query.Where(u => u.Description == desc);
-            if (reminderType.HasValue)
-                query = query.Where(u => u.ReminderType == reminderType.Value);
-            if (remindAt.HasValue)
-                query = query.Where(u => u.RemindAt >= remindAt.Value && u.RemindAt < remindAt.Value.AddSeconds(1));
+            if (reminderID.HasValue) query = query.Where(u => u.ReminderID == reminderID.Value);
+            if (patientID.HasValue) query = query.Where(u => u.PatientID == patientID.Value);
+            if (!string.IsNullOrEmpty(title)) query = query.Where(u => u.Title == title);
+            if (!string.IsNullOrEmpty(desc)) query = query.Where(u => u.Description == desc);
+            if (reminderType.HasValue) query = query.Where(u => u.ReminderType == reminderType.Value);
+            if (remindAt.HasValue) query = query.Where(u => u.RemindAt >= remindAt.Value && u.RemindAt < remindAt.Value.AddSeconds(1));
 
             var reminders = await query.ToListAsync();
 

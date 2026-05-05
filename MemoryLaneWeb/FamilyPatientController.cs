@@ -20,6 +20,22 @@ namespace MemoryLaneWeb
             return Ok(result);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> Get(int? familyid, int? patientid, string rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
+        {
+            var result = await _service.CheckFamilyPatient(familyid, patientid, rs, canviewloc, canviewalert, assignedat);
+            if (result == null) return NotFound("Family patient not found");
+            return Ok(result);
+        }
+
+        [HttpGet("searchmultiple")]
+        public async Task<IActionResult> GetAll(int? familyid, int? patientid, string rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
+        {
+            var result = await _service.CheckFamilyPatients(familyid, patientid, rs, canviewloc, canviewalert, assignedat);
+            if (result.Count == 0) return NotFound("Family patient not found");
+            return Ok(result);
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> Add(FamilyPatient fpatient)
         {

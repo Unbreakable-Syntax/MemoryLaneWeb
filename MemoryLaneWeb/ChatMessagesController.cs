@@ -20,6 +20,22 @@ namespace MemoryLaneWeb
             return Ok(result);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> Get(int? senderid, string sendername, string senderrole, int? recipientid, string content, DateTime sentat, bool? isread)
+        {
+            var result = await _service.CheckChatMessage(senderid, sendername, senderrole, recipientid, content, sentat, isread);
+            if (result == null) return NotFound("Chat message not found");
+            return Ok(result);
+        }
+
+        [HttpGet("searchmultiple")]
+        public async Task<IActionResult> GetAll(int? senderid, string sendername, string senderrole, int? recipientid, string content, DateTime sentat, bool? isread)
+        {
+            var result = await _service.CheckChatMessages(senderid, sendername, senderrole, recipientid, content, sentat, isread);
+            if (result.Count == 0) return NotFound("Chat message not found");
+            return Ok(result);
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> Add(ChatMessages message)
         {

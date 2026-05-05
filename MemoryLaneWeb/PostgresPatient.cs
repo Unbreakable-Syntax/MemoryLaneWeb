@@ -35,13 +35,38 @@ namespace MemoryLaneWeb
             return patient;
         }
 
-        public async Task<Patients?> CheckPatientUserID(int userid)
+        public async Task<Patients?> CheckPatient(int? userid, DateTime? birthdate, Genders? gender, string medcons, int? age, string meds, string allergies)
         {
             var query = _db.Patients.AsQueryable();
-            query = query.Where(r => r.UserID == userid);
+
+            if (userid.HasValue) query = query.Where(u => u.UserID == userid.Value);
+            if (birthdate.HasValue) query = query.Where(u => u.Birthdate == birthdate.Value);
+            if (gender.HasValue) query = query.Where(u => u.Gender == gender.Value);
+            if (!string.IsNullOrEmpty(medcons)) query = query.Where(u => medcons.Equals(u.MedicalConditions));
+            if (age.HasValue) query = query.Where(u => u.Age == age.Value);
+            if (!string.IsNullOrEmpty(meds)) query = query.Where(u => meds.Equals(u.Medications));
+            if (!string.IsNullOrEmpty(allergies)) query = query.Where(u => allergies.Equals(u.Allergies));
             var patient = await query.FirstOrDefaultAsync();
+
             return patient;
         }
+
+        public async Task<List<Patients>> CheckPatients(int? userid, DateTime? birthdate, Genders? gender, string medcons, int? age, string meds, string allergies)
+        {
+            var query = _db.Patients.AsQueryable();
+
+            if (userid.HasValue) query = query.Where(u => u.UserID == userid.Value);
+            if (birthdate.HasValue) query = query.Where(u => u.Birthdate == birthdate.Value);
+            if (gender.HasValue) query = query.Where(u => u.Gender == gender.Value);
+            if (!string.IsNullOrEmpty(medcons)) query = query.Where(u => medcons.Equals(u.MedicalConditions));
+            if (age.HasValue) query = query.Where(u => u.Age == age.Value);
+            if (!string.IsNullOrEmpty(meds)) query = query.Where(u => meds.Equals(u.Medications));
+            if (!string.IsNullOrEmpty(allergies)) query = query.Where(u => allergies.Equals(u.Allergies));
+            var patients = await query.ToListAsync();
+
+            return patients;
+        }
+
 
         public async Task AddPatient(Patients patient)
         {

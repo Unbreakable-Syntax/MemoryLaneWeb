@@ -22,6 +22,22 @@ namespace MemoryLaneWeb
             return Ok(result);
         }
 
+        [HttpGet("search")]
+        public async Task<IActionResult> Get(int? patientid, AlertTypes? alerttype, Severities? severity, bool? isresolved, int? resolvedby, DateTime? resolvedat, DateTime? triggered)
+        {
+            var result = await _service.CheckEmergencyAlert(patientid, alerttype, severity, isresolved, resolvedby, resolvedat, triggered);
+            if (result == null) return NotFound("Emergency alert not found");
+            return Ok(result);
+        }
+
+        [HttpGet("searchmultiple")]
+        public async Task<IActionResult> GetAll(int? patientid, AlertTypes? alerttype, Severities? severity, bool? isresolved, int? resolvedby, DateTime? resolvedat, DateTime? triggered)
+        {
+            var result = await _service.CheckEmergencyAlerts(patientid, alerttype, severity, isresolved, resolvedby, resolvedat, triggered);
+            if (result.Count == 0) return NotFound("Emergency alert not found");
+            return Ok(result);
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> Add(EmergencyAlerts alert)
         {
