@@ -21,7 +21,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Get(string fullname, string email, string phone, UserRoles? role, bool? isactive)
+        public async Task<IActionResult> Get(string? fullname, string? email, string? phone, UserRoles? role, bool? isactive)
         {
             var result = await _service.CheckUser(fullname, email, phone, role, isactive);
             if (result == null) return NotFound("User not found");
@@ -29,7 +29,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("searchmultiple")]
-        public async Task<IActionResult> GetAll(string fullname, string email, string phone, UserRoles? role, bool? isactive)
+        public async Task<IActionResult> GetAll(string? fullname, string? email, string? phone, UserRoles? role, bool? isactive)
         {
             var result = await _service.CheckUsers(fullname, email, phone, role, isactive);
             if (result.Count == 0) return NotFound("User not found");

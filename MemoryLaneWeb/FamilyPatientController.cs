@@ -21,7 +21,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Get(int? familyid, int? patientid, string rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
+        public async Task<IActionResult> Get(int? familyid, int? patientid, string? rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
         {
             var result = await _service.CheckFamilyPatient(familyid, patientid, rs, canviewloc, canviewalert, assignedat);
             if (result == null) return NotFound("Family patient not found");
@@ -29,7 +29,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("searchmultiple")]
-        public async Task<IActionResult> GetAll(int? familyid, int? patientid, string rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
+        public async Task<IActionResult> GetAll(int? familyid, int? patientid, string? rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
         {
             var result = await _service.CheckFamilyPatients(familyid, patientid, rs, canviewloc, canviewalert, assignedat);
             if (result.Count == 0) return NotFound("Family patient not found");

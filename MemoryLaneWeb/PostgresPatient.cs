@@ -35,7 +35,7 @@ namespace MemoryLaneWeb
             return patient;
         }
 
-        public async Task<Patients?> CheckPatient(int? userid, DateTime? birthdate, Genders? gender, string medcons, int? age, string meds, string allergies)
+        public async Task<Patients?> CheckPatient(int? userid, DateTime? birthdate, Genders? gender, string? medcons, int? age, string? meds, string? allergies)
         {
             var query = _db.Patients.AsQueryable();
 
@@ -51,7 +51,7 @@ namespace MemoryLaneWeb
             return patient;
         }
 
-        public async Task<List<Patients>> CheckPatients(int? userid, DateTime? birthdate, Genders? gender, string medcons, int? age, string meds, string allergies)
+        public async Task<List<Patients>> CheckPatients(int? userid, DateTime? birthdate, Genders? gender, string? medcons, int? age, string? meds, string? allergies)
         {
             var query = _db.Patients.AsQueryable();
 

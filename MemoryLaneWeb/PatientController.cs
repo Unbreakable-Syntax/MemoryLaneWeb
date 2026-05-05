@@ -25,7 +25,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Get(int? userid, DateTime birthdate, Genders gender, string medcon, int? age, string meds, string allergies)
+        public async Task<IActionResult> Get(int? userid, DateTime birthdate, Genders gender, string? medcon, int? age, string? meds, string? allergies)
         {
             var result = await _service.CheckPatient(userid, birthdate, gender, medcon, age, meds, allergies);
             if (result == null) return NotFound("Patient not found");
@@ -33,7 +33,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("searchmultiple")]
-        public async Task<IActionResult> GetAll(int? userid, DateTime? birthdate, Genders? gender, string medcon, int? age, string meds, string allergies)
+        public async Task<IActionResult> GetAll(int? userid, DateTime? birthdate, Genders? gender, string? medcon, int? age, string? meds, string? allergies)
         {
             var result = await _service.CheckPatients(userid, birthdate, gender, medcon, age, meds, allergies);
             if (result.Count == 0) return NotFound("Patient not found");

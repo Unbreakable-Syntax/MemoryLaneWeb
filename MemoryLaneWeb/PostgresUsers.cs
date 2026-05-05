@@ -11,7 +11,7 @@ namespace MemoryLaneWeb
             _db = db;
         }
 
-        public async Task<Users?> CheckUser(string fullname, string email, string phone, UserRoles? role, bool? isactive)
+        public async Task<Users?> CheckUser(string? fullname, string? email, string? phone, UserRoles? role, bool? isactive)
         {
             var query = _db.Users.AsQueryable();
             if (!string.IsNullOrEmpty(fullname)) query = query.Where(u => fullname.Equals(u.FullName));
@@ -23,7 +23,7 @@ namespace MemoryLaneWeb
             return user;
         }
 
-        public async Task<List<Users>> CheckUsers(string fullname, string email, string phone, UserRoles? role, bool? isactive)
+        public async Task<List<Users>> CheckUsers(string? fullname, string? email, string? phone, UserRoles? role, bool? isactive)
         {
             var query = _db.Users.AsQueryable();
             if (!string.IsNullOrEmpty(fullname)) query = query.Where(u => fullname.Equals(u.FullName));

@@ -18,7 +18,7 @@ namespace MemoryLaneWeb
             return safezone;
         }
 
-        public async Task<SafeZones?> CheckSafezone(int? patientid, string zonename, bool? isactive, int? createdby)
+        public async Task<SafeZones?> CheckSafezone(int? patientid, string? zonename, bool? isactive, int? createdby)
         {
             var query = _db.SafeZones.AsQueryable();
             if (patientid.HasValue) query = query.Where(u => u.PatientID == patientid);
@@ -30,7 +30,7 @@ namespace MemoryLaneWeb
             return safezone;
         }
 
-        public async Task<List<SafeZones>> CheckSafezones(int? patientid, string zonename, bool? isactive, int? createdby)
+        public async Task<List<SafeZones>> CheckSafezones(int? patientid, string? zonename, bool? isactive, int? createdby)
         {
             var query = _db.SafeZones.AsQueryable();
             if (patientid.HasValue) query = query.Where(u => u.PatientID == patientid);

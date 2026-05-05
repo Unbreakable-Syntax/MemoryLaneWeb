@@ -22,7 +22,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Get(int? patientid, string zonename, bool? isactive, int? createdby)
+        public async Task<IActionResult> Get(int? patientid, string? zonename, bool? isactive, int? createdby)
         {
             var result = await _service.CheckSafezone(patientid, zonename, isactive, createdby);
             if (result == null) return NotFound("Safezone not found");
@@ -30,7 +30,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("searchmultiple")]
-        public async Task<IActionResult> GetAll(int? patientid, string zonename, bool? isactive, int? createdby)
+        public async Task<IActionResult> GetAll(int? patientid, string? zonename, bool? isactive, int? createdby)
         {
             var result = await _service.CheckSafezones(patientid, zonename, isactive, createdby);
             if (result.Count == 0) return NotFound("Safezone not found");

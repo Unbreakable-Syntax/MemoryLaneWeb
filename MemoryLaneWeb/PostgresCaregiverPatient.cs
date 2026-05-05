@@ -18,7 +18,7 @@ namespace MemoryLaneWeb
             return patient;
         }
 
-        public async Task<CaregiverPatient?> CheckCaregiverPatient(int? caregiverid, int? patientid, string emername, string emerphone)
+        public async Task<CaregiverPatient?> CheckCaregiverPatient(int? caregiverid, int? patientid, string? emername, string? emerphone)
         {
             var query = _db.CaregiverPatient.AsQueryable();
             if (caregiverid.HasValue) query = query.Where(u => u.CaregiverID == caregiverid.Value);
@@ -29,7 +29,7 @@ namespace MemoryLaneWeb
             return patient;
         }
 
-        public async Task<List<CaregiverPatient>> CheckCaregiverPatients(int? caregiverid, int? patientid, string emername, string emerphone)
+        public async Task<List<CaregiverPatient>> CheckCaregiverPatients(int? caregiverid, int? patientid, string? emername, string? emerphone)
         {
             var query = _db.CaregiverPatient.AsQueryable();
             if (caregiverid.HasValue) query = query.Where(u => u.CaregiverID == caregiverid.Value);

@@ -16,7 +16,7 @@ namespace MemoryLaneWeb
         [HttpGet("search")]
         public async Task<IActionResult> GetAll(int? reminderID, int? patientID, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt)
         {
-            var result = await _service.FindReminders(reminderID, patientID, title, desc, reminderType, remindAt);
+            var result = await _service.CheckReminders(reminderID, patientID, title, desc, reminderType, remindAt);
             if (result.Count == 0) return NotFound("Reminder not found");
             return Ok(result);
         }

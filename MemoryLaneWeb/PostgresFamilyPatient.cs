@@ -18,7 +18,7 @@ namespace MemoryLaneWeb
             return fpatient;
         }
 
-        public async Task<FamilyPatient?> CheckFamilyPatient(int? familyid, int? patientid, string rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
+        public async Task<FamilyPatient?> CheckFamilyPatient(int? familyid, int? patientid, string? rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
         {
             var query = _db.FamilyPatient.AsQueryable();
             if (familyid.HasValue) query = query.Where(u => u.FamilyID == familyid.Value);
@@ -30,7 +30,7 @@ namespace MemoryLaneWeb
             return familypatient;
         }
 
-        public async Task<List<FamilyPatient>> CheckFamilyPatients(int? familyid, int? patientid, string rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
+        public async Task<List<FamilyPatient>> CheckFamilyPatients(int? familyid, int? patientid, string? rs, bool? canviewloc, bool? canviewalert, DateTime? assignedat)
         {
             var query = _db.FamilyPatient.AsQueryable();
             if (familyid.HasValue) query = query.Where(u => u.FamilyID == familyid.Value);
