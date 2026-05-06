@@ -68,6 +68,8 @@ namespace MemoryLaneWeb
             var target = await _db.EmergencyAlerts.FindAsync(alertid);
             if (target == null) return false;
             target.ResolvedBy = resolvedby;
+            target.IsResolved = true;
+            target.ResolvedAt = DateTime.UtcNow;
             await _db.SaveChangesAsync();
             return true;
         }
