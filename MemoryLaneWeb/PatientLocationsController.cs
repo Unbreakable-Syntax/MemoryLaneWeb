@@ -13,7 +13,7 @@ namespace MemoryLaneWeb
         }
 
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(long id)
         {
             var result = await _service.CheckPatientLocation(id);
@@ -44,7 +44,7 @@ namespace MemoryLaneWeb
             return Ok("Patient location added");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(long id)
         {
             var result = await _service.DeletePatientLocation(id);

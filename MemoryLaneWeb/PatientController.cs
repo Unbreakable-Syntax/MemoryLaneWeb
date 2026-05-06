@@ -16,7 +16,7 @@ namespace MemoryLaneWeb
             _service = service;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckPatient(id);
@@ -47,7 +47,7 @@ namespace MemoryLaneWeb
             return Ok("Patient added");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.DeletePatient(id);
@@ -55,7 +55,7 @@ namespace MemoryLaneWeb
             return Ok("Patient deleted");
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, int? age, string? medcons, string? meds, string? allergies)
         {
             var result = await _service.UpdatePatient(id, age, medcons, meds, allergies);

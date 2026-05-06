@@ -14,7 +14,7 @@ namespace MemoryLaneWeb
             _service = service;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(long id)
         {
             var result = await _service.CheckEmergencyAlert(id);
@@ -45,7 +45,7 @@ namespace MemoryLaneWeb
             return Ok("Emergency alert added");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(long id)
         {
             var result = await _service.DeleteEmergencyAlert(id);

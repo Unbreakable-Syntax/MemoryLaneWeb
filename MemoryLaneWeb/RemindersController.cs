@@ -45,7 +45,7 @@ namespace MemoryLaneWeb
             return Ok(result);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> Get(int id)
         {
             var result = await _service.CheckReminder(id);
@@ -60,7 +60,7 @@ namespace MemoryLaneWeb
             return Ok("Reminder added");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{id:int}")]
         public async Task<IActionResult> Delete(int id)
         {
             var result = await _service.DeleteReminder(id);
@@ -68,7 +68,7 @@ namespace MemoryLaneWeb
             return Ok("Reminder deleted");
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id:int}")]
         public async Task<IActionResult> Update(int id, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt, ReminderOccurence? recurrence, bool? isacknowledged, bool? isactive)
         {
             var result = await _service.UpdateReminder(id, title, desc, reminderType, remindAt, recurrence, isacknowledged, isactive);
