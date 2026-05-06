@@ -63,7 +63,7 @@ namespace MemoryLaneWeb
             return true;
         }
 
-        public async Task<bool> MarkResolved(int alertid, int resolvedby)
+        public async Task<bool> MarkResolved(long alertid, int resolvedby)
         {
             var target = await _db.EmergencyAlerts.FindAsync(alertid);
             if (target == null) return false;

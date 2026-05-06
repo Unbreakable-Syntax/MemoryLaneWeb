@@ -53,8 +53,8 @@ namespace MemoryLaneWeb
             return Ok("Emergency alert deleted");
         }
 
-        [HttpGet("markresolved/{id:int}")]
-        public async Task<IActionResult> MarkResolved(int id, int resolvedby)
+        [HttpGet("markresolved/{id:long}")]
+        public async Task<IActionResult> MarkResolved(long id, int resolvedby)
         {
             var result = await _service.MarkResolved(id, resolvedby);
             if (!result) return NotFound("Emergency alert not found");
