@@ -47,8 +47,8 @@ namespace MemoryLaneWeb
             if (isbroadcast.HasValue) query = query.Where(u => u.IsBroadcast == isbroadcast.Value);
             if (patientid.HasValue) query = query.Where(u => u.PatientID == patientid.Value);
             List<ChatMessages> chatmessages = new List<ChatMessages>();
-            if (isdesc) await query.OrderByDescending(e => EF.Property<object>(e, orderby)).Skip(offset).Take(limit).ToListAsync();
-            else await query.OrderBy(e => EF.Property<object>(e, orderby)).Skip(offset).Take(limit).ToListAsync();
+            if (isdesc) chatmessages = await query.OrderByDescending(e => EF.Property<object>(e, orderby)).Skip(offset).Take(limit).ToListAsync();
+            else chatmessages = await query.OrderBy(e => EF.Property<object>(e, orderby)).Skip(offset).Take(limit).ToListAsync();
             return chatmessages;
         }
 
