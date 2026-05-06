@@ -21,7 +21,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Get(int? senderid, string? sendername, string? senderrole, int? recipientid, string? content, DateTime sentat, bool? isread, bool? isbroadcast, int? patientid)
+        public async Task<IActionResult> Get(int? senderid, string? sendername, string? senderrole, int? recipientid, string? content, DateTime? sentat, bool? isread, bool? isbroadcast, int? patientid)
         {
             var result = await _service.CheckChatMessage(senderid, sendername, senderrole, recipientid, content, sentat, isread, isbroadcast, patientid);
             if (result == null) return NotFound("Chat message not found");
@@ -29,7 +29,7 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("searchmultiple")]
-        public async Task<IActionResult> GetAll(int? senderid, string? sendername, string? senderrole, int? recipientid, string? content, DateTime sentat, bool? isread, bool? isbroadcast, int? patientid, string orderby, bool isdesc, int limit, int offset)
+        public async Task<IActionResult> GetAll(int? senderid, string? sendername, string? senderrole, int? recipientid, string? content, DateTime? sentat, bool? isread, bool? isbroadcast, int? patientid, string orderby, bool isdesc, int limit, int offset)
         {
             var result = await _service.CheckChatMessages(senderid, sendername, senderrole, recipientid, content, sentat, isread, isbroadcast, patientid, orderby, isdesc, limit, offset);
             if (result.Count == 0) return NotFound("Chat message not found");

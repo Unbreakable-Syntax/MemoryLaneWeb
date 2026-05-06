@@ -50,7 +50,6 @@ namespace MemoryLaneWeb
         public async Task<Users?> CheckUserEmail(string? email)
         {
             var query = _db.Users.AsQueryable();
-            
             var users = await query.FirstOrDefaultAsync();
             return users;
         }
