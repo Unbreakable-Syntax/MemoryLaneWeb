@@ -37,10 +37,13 @@ namespace MemoryLaneWeb
         public async Task<List<ChatMessages>> CheckChatMessages(int? senderid, string? sendername, string? senderrole, int? recipientid, string? content, DateTime? sentat, bool? isread, bool? isbroadcast, int? patientid, string orderby, bool isdesc, int limit, int offset)
         {
             var query = _db.ChatMessages.AsQueryable();
-            if (senderid.HasValue) query = query.Where(u => u.SenderID == senderid.Value);
+            if (senderid.HasValue && recipientid.HasValue)
+            {
+                query = query.Where(u => (u.SenderID == senderid.Value && u.RecipientID == recipientid.Value) || (u.SenderID == recipientid.Value && u.RecipientID == senderid.Value));
+            }    
             if (!string.IsNullOrEmpty(sendername)) query = query.Where(u => sendername.Equals(u.SenderName));
             if (!string.IsNullOrEmpty(senderrole)) query = query.Where(u => senderrole.Equals(u.SenderRole));
-            if (recipientid.HasValue) query = query.Where(u => u.RecipientID == recipientid.Value);
+            
             if (!string.IsNullOrEmpty(content)) query = query.Where(u => content.Equals(u.Content));
             if (sentat.HasValue) query = query.Where(u => u.SentAt == sentat.Value);
             if (isread.HasValue) query = query.Where(u => u.IsRead == isread.Value);
