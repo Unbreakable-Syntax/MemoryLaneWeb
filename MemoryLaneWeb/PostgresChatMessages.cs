@@ -18,7 +18,7 @@ namespace MemoryLaneWeb
             return message;
         }
 
-        public async Task<ChatMessages?> CheckChatMessage(int? senderid, string sendername, string senderrole, int? recipientid, string content, DateTime? sentat, bool? isread, bool? isbroadcast, int? patientid)
+        public async Task<ChatMessages?> CheckChatMessage(int? senderid, string? sendername, string? senderrole, int? recipientid, string? content, DateTime? sentat, bool? isread, bool? isbroadcast, int? patientid)
         {
             var query = _db.ChatMessages.AsQueryable();
             if (senderid.HasValue) query = query.Where(u => u.SenderID == senderid.Value);
@@ -34,7 +34,7 @@ namespace MemoryLaneWeb
             return chatmessage;
         }
 
-        public async Task<List<ChatMessages>> CheckChatMessages(int? senderid, string sendername, string senderrole, int? recipientid, string content, DateTime? sentat, bool? isread, bool? isbroadcast, int? patientid, string orderby, bool isdesc, int limit, int offset)
+        public async Task<List<ChatMessages>> CheckChatMessages(int? senderid, string? sendername, string? senderrole, int? recipientid, string? content, DateTime? sentat, bool? isread, bool? isbroadcast, int? patientid, string orderby, bool isdesc, int limit, int offset)
         {
             var query = _db.ChatMessages.AsQueryable();
             if (senderid.HasValue) query = query.Where(u => u.SenderID == senderid.Value);
