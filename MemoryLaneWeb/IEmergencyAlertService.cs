@@ -7,5 +7,6 @@
         Task<List<EmergencyAlerts>> CheckEmergencyAlerts(int? patientid, AlertTypes? alerttype, Severities? severity, bool? isresolved, int? resolvedby, DateTime? resolvedat, DateTime? triggered);
         Task AddEmergencyAlert(EmergencyAlerts alert);
         Task<bool> DeleteEmergencyAlert(long id);
+        Task<bool> MarkResolved(int alertid, int resolvedby);
     }
 }
