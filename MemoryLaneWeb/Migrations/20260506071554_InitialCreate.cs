@@ -25,6 +25,7 @@ namespace MemoryLaneWeb.Migrations
                     Content = table.Column<string>(type: "text", nullable: true),
                     SentAt = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     IsRead = table.Column<bool>(type: "boolean", nullable: false),
+                    IsBroadcast = table.Column<bool>(type: "boolean", nullable: false),
                     PatientID = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

@@ -3,6 +3,7 @@
     public interface IUserService
     {
         Task<Users?> CheckUser(int id);
+        Task<string?> CallUser(int patientid);
         Task<Users?> CheckUser(string? fullname, string? email, string? phone, UserRoles? role, bool? isactive);
         Task<List<Users>> CheckUsers(string? fullname, string? email, string? phone, UserRoles? role, bool? isactive);
         Task<int> AddUser(Users user);

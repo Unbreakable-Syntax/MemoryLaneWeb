@@ -22,17 +22,17 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Get(int? patientid, GPSSources? source, DateTime? recordedat)
+        public async Task<IActionResult> Get(int? patientid, GPSSources? source, DateTime? recordedat, string? orderby, bool? isdesc)
         {
-            var result = await _service.CheckPatientLocation(patientid, source, recordedat);
+            var result = await _service.CheckPatientLocation(patientid, source, recordedat, orderby, isdesc);
             if (result == null) return NotFound("Patient location not found");
             return Ok(result);
         }
 
         [HttpGet("searchmultiple")]
-        public async Task<IActionResult> GetAll(int? patientid, GPSSources? source, DateTime? recordedat)
+        public async Task<IActionResult> GetAll(int? patientid, GPSSources? source, DateTime? recordedat, string? orderby, bool? isdesc)
         {
-            var result = await _service.CheckPatientLocations(patientid, source, recordedat);
+            var result = await _service.CheckPatientLocations(patientid, source, recordedat, orderby, isdesc);
             if (result.Count == 0) return NotFound("Patient location not found");
             return Ok(result);
         }

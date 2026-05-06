@@ -12,6 +12,14 @@ namespace MemoryLaneWeb
             _service = service;
         }
 
+        [HttpGet("call/{id}")]
+        public async Task<IActionResult> GetPhone(int id)
+        {
+            var result = await _service.CallUser(id);
+            if (result == null) return NotFound("User not found");
+            return Ok(result);
+        }
+
         [HttpGet("{id}")]
         public async Task<IActionResult> Get(int id)
         {

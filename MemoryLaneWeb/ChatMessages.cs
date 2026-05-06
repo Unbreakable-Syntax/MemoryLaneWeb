@@ -19,6 +19,7 @@ namespace MemoryLaneWeb
         public string? Content { get; set; }
         public DateTime SentAt { get; set; } = DateTime.UtcNow;
         public bool IsRead { get; set; } = false;
+        public bool IsBroadcast { get; set; }
         public int PatientID { get; set; }
     }
 }

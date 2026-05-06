@@ -77,6 +77,9 @@ namespace MemoryLaneWeb.Migrations
                     b.Property<string>("Content")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsBroadcast")
+                        .HasColumnType("boolean");
+
                     b.Property<bool>("IsRead")
                         .HasColumnType("boolean");
 

@@ -11,6 +11,18 @@ namespace MemoryLaneWeb
             _db = db;
         }
 
+        public async Task<string?> CallUser(int patientid)
+        {
+            var phone = await _db.Patients
+            .Where(p => p.PatientID == patientid)
+            .Join(_db.Users,
+            p => p.UserID,
+            u => u.UserID,
+            (p, u) => u.Phone)
+            .FirstOrDefaultAsync();
+            return phone;
+        }
+
         public async Task<Users?> CheckUser(string? fullname, string? email, string? phone, UserRoles? role, bool? isactive)
         {
             var query = _db.Users.AsQueryable();

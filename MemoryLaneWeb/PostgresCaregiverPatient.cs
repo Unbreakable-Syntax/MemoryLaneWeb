@@ -42,7 +42,19 @@ namespace MemoryLaneWeb
 
         public async Task AddCaregiverPatient(CaregiverPatient patient)
         {
-            _db.CaregiverPatient.Add(patient);
+            var query = _db.CaregiverPatient.AsQueryable();
+            query = query.Where(u => u.PatientID == patient.PatientID || u.CaregiverID == patient.CaregiverID);
+            var result = await query.FirstOrDefaultAsync();
+            if (result != null)
+            {
+                result.EmergencyContactName = patient.EmergencyContactName;
+                result.EmergencyContactPhone = patient.EmergencyContactPhone;
+                result.SafeZoneLatitude = patient.SafeZoneLatitude;
+                result.SafeZoneLongitude = patient.SafeZoneLongitude;
+                result.SafeZoneRadius = patient.SafeZoneRadius;
+            }
+            else _db.CaregiverPatient.Add(patient);
+
             await _db.SaveChangesAsync();
         }
 

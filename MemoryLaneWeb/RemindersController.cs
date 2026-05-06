@@ -14,17 +14,33 @@ namespace MemoryLaneWeb
         }
 
         [HttpGet("search")]
-        public async Task<IActionResult> Get(int? reminderID, int? patientID, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt)
+        public async Task<IActionResult> Get(int? patientid, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt, ReminderOccurence? recurrence, bool? isacknowledged, bool? isactive, string? orderby, bool? isdesc)
         {
-            var result = await _service.CheckReminder(reminderID, patientID, title, desc, reminderType, remindAt);
+            var result = await _service.CheckReminder(patientid, title, desc, reminderType, remindAt, recurrence, isacknowledged, isactive, orderby, isdesc);
             if (result == null) return NotFound("Reminder not found");
             return Ok(result);
         }
 
         [HttpGet("searchmultiple")]
-        public async Task<IActionResult> GetAll(int? reminderID, int? patientID, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt)
+        public async Task<IActionResult> GetAll(int? patientid, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt, ReminderOccurence? recurrence, bool? isacknowledged, bool? isactive, string? orderby, bool? isdesc)
         {
-            var result = await _service.CheckReminders(reminderID, patientID, title, desc, reminderType, remindAt);
+            var result = await _service.CheckReminders(patientid, title, desc, reminderType, remindAt, recurrence, isacknowledged, isactive, orderby, isdesc);
+            if (result.Count == 0) return NotFound("Reminder not found");
+            return Ok(result);
+        }
+
+        [HttpGet("getalluser/{id}")]
+        public async Task<IActionResult> GetAll(int id)
+        {
+            var result = await _service.GetReminders(id);
+            if (result.Count == 0) return NotFound("Reminder not found");
+            return Ok(result);
+        }
+
+        [HttpGet("getallcaregiver/{id}")]
+        public async Task<IActionResult> GetAllCaregiver(int id)
+        {
+            var result = await _service.GetRemindersCaregiver(id);
             if (result.Count == 0) return NotFound("Reminder not found");
             return Ok(result);
         }
@@ -50,6 +66,14 @@ namespace MemoryLaneWeb
             var result = await _service.DeleteReminder(id);
             if (!result) return NotFound("Reminder not found");
             return Ok("Reminder deleted");
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> Update(int id, string? title, string? desc, ReminderTypes? reminderType, DateTime? remindAt, ReminderOccurence? recurrence, bool? isacknowledged, bool? isactive)
+        {
+            var result = await _service.UpdateReminder(id, title, desc, reminderType, remindAt, recurrence, isacknowledged, isactive);
+            if (!result) return NotFound("Reminder not found");
+            return Ok("Reminder updated");
         }
     }
 }

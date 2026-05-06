@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MemoryLaneWeb.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260504161415_InitialCreate")]
+    [Migration("20260506071554_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -79,6 +79,9 @@ namespace MemoryLaneWeb.Migrations
 
                     b.Property<string>("Content")
                         .HasColumnType("text");
+
+                    b.Property<bool>("IsBroadcast")
+                        .HasColumnType("boolean");
 
                     b.Property<bool>("IsRead")
                         .HasColumnType("boolean");
