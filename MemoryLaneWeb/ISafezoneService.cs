@@ -7,5 +7,6 @@
         Task<List<SafeZones>> CheckSafezones(int? patientid, string? zonename, bool? isactive, int? createdby);
         Task AddSafezone(SafeZones safezone);
         Task<bool> DeleteSafezone(int id);
+        Task<bool> MarkInactive(int id);
     }
 }

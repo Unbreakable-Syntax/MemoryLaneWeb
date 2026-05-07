@@ -56,5 +56,14 @@ namespace MemoryLaneWeb
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> MarkInactive(int id)
+        {
+            var result = await _db.SafeZones.FindAsync(id);
+            if (result == null) return false;
+            result.IsActive = false;
+            await _db.SaveChangesAsync();
+            return true;
+        }
     }
 }

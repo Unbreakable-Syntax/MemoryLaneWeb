@@ -37,6 +37,14 @@ namespace MemoryLaneWeb
             return Ok(result);
         }
 
+        [HttpGet("deact/{id:int}")]
+        public async Task<IActionResult> Mark(int id)
+        {
+            var result = await _service.MarkInactive(id);
+            if (result == false) return NotFound("Safezone not found");
+            return Ok("Safezone deactivated");
+        }
+
         [HttpPost("add")]
         public async Task<IActionResult> Add(SafeZones safezone)
         {
