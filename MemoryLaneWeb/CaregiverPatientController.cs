@@ -51,5 +51,14 @@ namespace MemoryLaneWeb
             if (!result) return NotFound("Caregiver patient not found");
             return Ok("Caregiver patient deleted");
         }
+
+        [HttpGet("unenroll/{id:int}")]
+        public async Task<IActionResult> Unenroll(int id)
+        {
+            var result = await _service.UnenrollPatient(id);
+            if (!result) return NotFound("Caregiver patient not found");
+            return Ok("Caregiver patient unenrolled");
+        }
+
     }
 }

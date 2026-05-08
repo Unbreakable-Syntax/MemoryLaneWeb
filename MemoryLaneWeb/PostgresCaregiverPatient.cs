@@ -66,5 +66,23 @@ namespace MemoryLaneWeb
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<bool> UnenrollPatient(int userid)
+        {
+            var query = _db.CaregiverPatient.AsQueryable();
+            query = query.Where(u => u.CaregiverID == userid);
+            var result = await query.FirstOrDefaultAsync();
+            if (result == null) return false;
+            int patientid = result.PatientID;
+
+            await _db.EmergencyAlerts.Where(u => u.PatientID == patientid).ExecuteDeleteAsync();
+            await _db.Reminders.Where(u => u.PatientID == patientid).ExecuteDeleteAsync();
+            await _db.SafeZones.Where(u => u.PatientID == patientid).ExecuteDeleteAsync();
+            await _db.ChatMessages.Where(u => u.PatientID == patientid).ExecuteDeleteAsync();
+            await _db.CaregiverPatient.Where(u => u.Id == result.Id).ExecuteDeleteAsync();
+            await _db.SaveChangesAsync();
+
+            return true;
+        }
     }
 }

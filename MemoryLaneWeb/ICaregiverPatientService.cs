@@ -7,5 +7,6 @@
         Task<List<CaregiverPatient>> CheckCaregiverPatients(int? caregiverid, int? patientid, string? emername, string? emerphone);
         Task AddCaregiverPatient(CaregiverPatient patient);
         Task<bool> DeleteCaregiverPatient(int id);
+        Task<bool> UnenrollPatient(int userid);
     }
 }
